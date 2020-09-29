@@ -1,0 +1,7 @@
+-   id: pre-commit-sync
+    name: "pre-commit-sync"
+    description: "Keep files in sync between web and local repository."
+    entry: pre-commit-sync
+    always_run: true
+    language: python
+    minimum_pre_commit_version: 0.15.0
