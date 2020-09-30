@@ -7,7 +7,7 @@ Then you can use a hook like this to keep your file in sync:
 ```
 repos:
 -   repo: https://github.com/dvolgyes/pre-commit-sync
-    rev: "v0.1.0"
+    rev: "v0.1.1"
     hooks:
     -   id: pre-commit-sync
         args: ['--sync=.pre-commit-config.yaml:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.pre-commit-config.yaml']
