@@ -7,7 +7,7 @@ Then you can use a hook like this to keep your file in sync:
 ```
 repos:
 -   repo: https://github.com/dvolgyes/pre-commit-sync
-    rev: "v0.1.1"
+    rev: "v0.2.0"
     hooks:
     -   id: pre-commit-sync
         args: ['--sync=.pre-commit-config.yaml:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.pre-commit-config.yaml']
@@ -28,10 +28,8 @@ above scheme, all projects will inherit the changes.
 
 ## Issues
 
-If you have a self-referencing hook, then you need to commit it like this:
-```git commit --no-verify FILE```
-otherwise it will overwrite its own modifications, obviously.
-
+If you have a self-referencing hook, the hook might overwrite itself.
+In order to avoid this, the hook does not modify any file which is locally changed already.
 
 ## Alternatives
 
