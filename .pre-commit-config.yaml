@@ -3,9 +3,9 @@ repos:
     rev: "v0.1.1"
     hooks:
     -   id: pre-commit-sync
-#        args:  ['--sync=.pre-commit-config.yaml:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.pre-commit-config.yaml',
-#               '--sync=.gitignore:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.gitignore',
-#                ]
+        args:  ['--sync=.pre-commit-config.yaml:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.pre-commit-config.yaml',
+               '--sync=.gitignore:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.gitignore',
+                ]
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:

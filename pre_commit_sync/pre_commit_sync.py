@@ -33,18 +33,30 @@ def main(argv=None):
     parser.add_argument('--sync', action='append', default=[])
     parser.add_argument('--sync-without-git', dest='sync_without_git', action='append', default=[])
     args = parser.parse_args()
-    untracked = set(git.Repo('.', search_parent_directories=True).untracked_files)
+    repository = git.Repo('.', search_parent_directories=True)
+    untracked = set(repository.untracked_files)
+    modified = []
+    for diff in repository.head.commit.diff(None):
+        if diff.a_path == diff.b_path and diff.change_type == 'M':
+            modified.append(str(Path(diff.a_path).resolve()))
+
+    modified = set(modified)
 
     for s in args.sync:
         fname, url = s.split(':', 1)
-        exit_code |= process(fname, url)
-
+        unique = str(Path(fname).resolve())
+        if unique not in modified:
+            exit_code |= process(fname, url)
+        else:
+            print(f'File has already been locally modified, update is ignored: {fname}', file=sys.stderr)
         if fname in untracked:
             missing_from_git.append(fname)
 
     for s in args.sync_without_git:
         fname, url = s.split(':', 1)
-        exit_code |= process(fname, url)
+
+        if fname not in modified:
+            exit_code |= process(fname, url)
 
     if len(missing_from_git) > 0:
         exit_code = True
