@@ -3,6 +3,8 @@ import sys
 import argparse
 from pathlib import Path
 import urllib.request
+import git
+
 
 def process(fname, url):
 
@@ -31,30 +33,31 @@ def main(argv=None):
     parser.add_argument('--sync', action='append', default=[])
     parser.add_argument('--sync-without-git', dest='sync_without_git', action='append', default=[])
     args = parser.parse_args()
-    filenames = set(args.filenames)
+    untracked = set(git.Repo('.', search_parent_directories=True).untracked_files)
 
     for s in args.sync:
-        fname, url = s.split(':',1)
+        fname, url = s.split(':', 1)
         exit_code |= process(fname, url)
 
-        if fname not in filenames:
+        if fname in untracked:
             missing_from_git.append(fname)
 
     for s in args.sync_without_git:
-        fname, url = s.split(':',1)
+        fname, url = s.split(':', 1)
         exit_code |= process(fname, url)
 
-    if len(missing_from_git)>0:
+    if len(missing_from_git) > 0:
         exit_code = True
         if len(missing_from_git) == 1:
-            print(f'This file is missing from git:', file=sys.stderr)
+            print('This file is missing from git:', file=sys.stderr)
         else:
-            print(f'These files are missing from git:', file=sys.stderr)
+            print('These files are missing from git:', file=sys.stderr)
         for fname in missing_from_git:
             print(f'  {fname}', file=sys.stderr)
 
     if exit_code:
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

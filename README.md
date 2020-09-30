@@ -26,6 +26,13 @@ From this moment on, the pre-commit will check if the source repository has chan
 E.g. you could make a github/user/companywise-precommits/.pre-commit-config.yaml, and with the
 above scheme, all projects will inherit the changes.
 
+## Issues
+
+If you have a self-referencing hook, then you need to commit it like this:
+```git commit --no-verify FILE```
+otherwise it will overwrite its own modifications, obviously.
+
+
 ## Alternatives
 
 Many, but i liked this solution more.

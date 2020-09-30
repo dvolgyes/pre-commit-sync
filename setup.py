@@ -21,8 +21,7 @@ setup(
 
     packages=find_packages(exclude=('tests*', 'testing*')),
     install_requires=[
-        'autopep8>=1.3',
-        'pyyaml',
+        'gitpython',
     ],
     entry_points={
         'console_scripts': [
