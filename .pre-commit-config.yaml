@@ -3,9 +3,9 @@ repos:
     rev: "v0.1.1"
     hooks:
     -   id: pre-commit-sync
-        args: ['--sync=.pre-commit-config.yaml:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.pre-commit-config.yaml',
-               '--sync=.gitignore:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.gitignore',
-                ]
+#        args:  ['--sync=.pre-commit-config.yaml:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.pre-commit-config.yaml',
+#               '--sync=.gitignore:https://raw.githubusercontent.com/dvolgyes/pre-commit-sync/master/.gitignore',
+#                ]
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
@@ -31,11 +31,13 @@ repos:
     -   id: forbid-new-submodules
     -   id: pretty-format-json
     -   id: requirements-txt-fixer
-    -   id: sort-simple-yaml
     -   id: mixed-line-ending
     -   id: pretty-format-json
         args: ['--autofix']
     -   id: trailing-whitespace
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.3
+    hooks:
     -   id: flake8
         additional_dependencies: [
             flake8-2020,
@@ -62,7 +64,6 @@ repos:
             flake8-pytest-style,
             flake8-quotes,
             flake8-raise,
-
             flake8-string-format,
             flake8-super-call,
             flake8-type-annotations,
@@ -71,18 +72,37 @@ repos:
         args: ['--max-line-length=140', '--ignore=E116,E203,E265,E800,E801,W503,N806,N812,N816']
 
 -   repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.6.0  # Use the ref you want to point at
+    rev: v1.6.0
     hooks:
     -   id: python-check-blanket-noqa
+    -   id: python-no-eval
     -   id: python-no-log-warn
     -   id: rst-backticks
+
 -   repo: https://github.com/asottile/pyupgrade
     rev: v2.7.2
     hooks:
     -   id: pyupgrade
         args: ['--py38-plus']
 -   repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: v1.5.4  # Use the sha / tag you want to point at
+    rev: v1.5.4
     hooks:
     -   id: autopep8
         args: ['--ignore=E112,E115,E116,E261,E262,E265','--select=E226', '-aaa', '--max-line-lengt=140']
+-   repo: https://github.com/asottile/dead
+    rev: v1.3.0
+    hooks:
+    -   id: dead
+-   repo: https://github.com/lovesegfault/beautysh
+    rev: 6.0.1
+    hooks:
+    -   id: beautysh
+-   repo: https://github.com/detailyang/pre-commit-shell
+    rev: 1.0.5
+    hooks:
+    - id: shell-lint
+      args: [--format=json]
+-   repo: https://github.com/markdownlint/markdownlint
+    rev: v0.11.0
+    hooks:
+    - id: markdownlint
