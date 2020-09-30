@@ -6,7 +6,7 @@ setup(
     name='pre_commit_sync',
     description='Keeping files sync between web and git.',
     url='https://github.com/dvolgyes/pre-commit-sync',
-    version='0.1.0',
+    version='0.1.1',
 
     author='David Volgyes',
     author_email='david.volgyes@ieee.org',
