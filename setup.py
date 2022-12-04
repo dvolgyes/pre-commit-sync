@@ -6,8 +6,7 @@ setup(
     name='pre_commit_sync',
     description='Keeping files sync between web and git.',
     url='https://github.com/dvolgyes/pre-commit-sync',
-    version='0.1.1',
-
+    version='0.3.0',
     author='David Volgyes',
     author_email='david.volgyes@ieee.org',
 
@@ -17,6 +16,9 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
     ],
 
     packages=find_packages(exclude=('tests*', 'testing*')),
